@@ -1,0 +1,37 @@
+{
+  "name": "toureiro",
+  "version": "0.1.0",
+  "description": "A graphic interface for bull.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/test_*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evanhuang8/Toureiro.git"
+  },
+  "keywords": [
+    "bull",
+    "distributed",
+    "queue",
+    "ui"
+  ],
+  "author": "Evan Huang <evanhuang8@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/evanhuang8/Toureiro/issues"
+  },
+  "homepage": "https://github.com/evanhuang8/Toureiro#readme",
+  "dependencies": {
+    "bluebird": "2.10.x",
+    "bull": "0.6.x",
+    "express": "4.13.x",
+    "lodash": "3.10.x",
+    "redis": "2.1.x"
+  },
+  "devDependencies": {
+    "chai": "3.3.x",
+    "mocha": "2.3.x",
+    "node-uuid": "1.4.x"
+  }
+}
