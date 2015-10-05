@@ -77,7 +77,7 @@ ToureiroSidebar = React.createClass({
     var _this = this;
     return (
       <div id="toureiro-sidebar">
-        <h1>Toureiro</h1>
+        <h4>Toureiro</h4>
         <div id="sidebar-queues">
           <label>Queues</label>
           <select name="queue" onChange={this.changeQueue}>

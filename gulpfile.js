@@ -2,6 +2,7 @@ var browserify = require('browserify');
 var gulp = require('gulp');
 var reactify = require('reactify');
 var buffer = require('vinyl-buffer');
+var less = require('gulp-less');
 var livereload = require('gulp-livereload');
 var notify = require('gulp-notify');
 var shell = require('gulp-shell');
@@ -10,6 +11,16 @@ var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var gutil = require('gulp-util');
 var watchify = require('watchify');
+
+var runLess = function() {
+  return gulp
+    .src('./views/css/toureiro.less')
+    .pipe(less())
+    .pipe(gulp.dest('./public/css/'))
+    .pipe(livereload());
+};
+
+gulp.task('less', runLess);
 
 gulp.task('build', function() {
   var bundler = browserify({
@@ -28,7 +39,7 @@ gulp.task('build', function() {
     .pipe(gulp.dest('./public/js/'));
 });
 
-function watch() {
+function watchBundle() {
   var watcher = watchify(browserify({
     entries: './views/jsx/index.jsx',
     debug: true,
@@ -59,11 +70,17 @@ function bundle(bundler) {
     }));
 }
 
+gulp.task('watchBundle', watchBundle);
+gulp.task('watchLess', function() {
+  runLess();
+  gulp.watch('./views/css/**/*.less', ['less']);
+});
+
+gulp.task('watch', ['watchBundle', 'watchLess']);
+
 gulp.task('livereload', function() {
   livereload.listen();
 });
-
-gulp.task('watch', watch);
 
 gulp.task('server', shell.task([
   'nodemon -w ./lib ./server.js'

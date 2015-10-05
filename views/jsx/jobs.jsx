@@ -2,6 +2,8 @@ var React = require('react');
 var $ = require('jquery');
 var moment = require('moment-timezone');
 
+var Pagination = require('./pagination.jsx');
+
 var ToureiroJobs = React.createClass({
 
   getInitialState: function() {
@@ -32,6 +34,15 @@ var ToureiroJobs = React.createClass({
     });
   },
 
+  handlePageChange: function(page) {
+    var _this = this;
+    this.setState({
+      page: page
+    }, function() {
+      _this.fetchJobs();
+    });
+  },
+
   render: function() {
     return (
       <div className="toureiro-jobs">
@@ -50,6 +61,7 @@ var ToureiroJobs = React.createClass({
           );
         })
       }
+      <Pagination total={Math.ceil(this.state.total / this.state.limit)} onPageChange={this.handlePageChange} />
       </div>
     );
   }
