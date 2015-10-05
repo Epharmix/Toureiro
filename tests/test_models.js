@@ -46,6 +46,10 @@ function resetData() {
 
 describe('Models', function() {
 
+  before(function() {
+    require('../lib/redis').init({});
+  });
+
   describe('Queue', function() {
   
     var Queue = require('../lib/models/queue');

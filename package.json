@@ -4,6 +4,7 @@
   "description": "A graphic interface for bull.",
   "main": "index.js",
   "scripts": {
+    "start": "node ./server.js",
     "test": "mocha tests/test_*"
   },
   "repository": {
@@ -24,14 +25,30 @@
   "homepage": "https://github.com/evanhuang8/Toureiro#readme",
   "dependencies": {
     "bluebird": "2.10.x",
+    "body-parser": "1.14.x",
     "bull": "0.6.x",
     "express": "4.13.x",
+    "jade": "1.11.x",
+    "jquery": "2.1.x",
     "lodash": "3.10.x",
+    "react": "0.13.x",
     "redis": "2.1.x"
   },
   "devDependencies": {
+    "browserify": "11.2.x",
     "chai": "3.3.x",
+    "gulp": "3.9.x",
+    "gulp-livereload": "3.8.x",
+    "gulp-notify": "2.2.x",
+    "gulp-shell": "0.4.x",
+    "gulp-sourcemaps": "1.6.x",
+    "gulp-uglify": "1.4.x",
+    "gulp-util": "3.0.x",
     "mocha": "2.3.x",
-    "node-uuid": "1.4.x"
+    "node-uuid": "1.4.x",
+    "reactify": "1.1.x",
+    "vinyl-buffer": "1.0.x",
+    "vinyl-source-stream": "1.1.x",
+    "watchify": "3.4.x"
   }
 }
