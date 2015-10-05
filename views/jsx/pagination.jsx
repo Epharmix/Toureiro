@@ -21,6 +21,26 @@ var Pagination = React.createClass({
     });
   },
 
+  stepPage: function(operand, event) {
+    var page = this.state.page + operand;
+    if (page < 0) {
+      page = 0;
+    } else if (page >= this.props.total) {
+      page = this.props.total - 1;
+      if (page < 0) {
+        page = 0;
+      }
+    }
+    var _this = this;
+    this.setState({
+      page: page
+    }, function() {
+      if (_this.props.onPageChange) {
+        _this.props.onPageChange(page);
+      }
+    });
+  },
+
   render: function() {
     var _this = this;
     var pages = [];
@@ -34,7 +54,7 @@ var Pagination = React.createClass({
       <div className="pagination">
         <ul>
           <li className="previous">
-            <a href="javascript:;" className="fui-arrow-left"></a>
+            <a href="javascript:;" className="fui-arrow-left" onClick={_this.stepPage.bind(_this, -1)}></a>
           </li>
           {
             pages.map(function(page) {
@@ -49,7 +69,7 @@ var Pagination = React.createClass({
             })
           }
           <li className="next">
-            <a href="javascript:;" className="fui-arrow-right"></a>
+            <a href="javascript:;" className="fui-arrow-right" onClick={_this.stepPage.bind(_this, 1)}></a>
           </li>
         </ul>
       </div>

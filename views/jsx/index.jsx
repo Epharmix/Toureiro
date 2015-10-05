@@ -25,7 +25,11 @@ var Toureiro = React.createClass({
     this.setState({
       category: category
     }, function() {
-      _this.refs.jobs.fetchJobs();
+      _this.refs.jobs.setState({
+        page: 0
+      }, function() {
+        _this.refs.jobs.fetchJobs();
+      });
     });
   },
 

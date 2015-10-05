@@ -31,6 +31,7 @@
     "classnames": "2.1.x",
     "express": "4.13.x",
     "flat-ui": "git+https://github.com/designmodo/Flat-UI.git#master",
+    "highlight.js": "8.8.x",
     "jade": "1.11.x",
     "jquery": "2.1.x",
     "lodash": "3.10.x",

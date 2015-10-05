@@ -3,6 +3,8 @@ var $ = require('jquery');
 
 ToureiroSidebar = React.createClass({
 
+  pollTimer: undefined,
+
   getInitialState: function() {
     var state = {
       queues: [],
@@ -13,7 +15,14 @@ ToureiroSidebar = React.createClass({
   },
 
   componentDidMount: function() {
+    var _this = this;
     this.listQueues();
+    this.pollTimer = setInterval(function() {
+      _this.listQueues();
+      if (_this.state.queue) {
+        _this.getQueue(_this.state.queue.name);
+      }
+    }, 2000);
   },
 
   listQueues: function() {
@@ -23,7 +32,7 @@ ToureiroSidebar = React.createClass({
         _this.setState({
           queues: response.queues
         })
-        if (response.queues.length > 0) {
+        if (!_this.state.queue && response.queues.length > 0) {
           _this.getQueue(response.queues[0]);
         }
       } else {
@@ -97,7 +106,7 @@ ToureiroSidebar = React.createClass({
               return (
                 <div key={key}>
                   <a href="javascript:;" onClick={_this.changeCategory.bind(_this, key)}>
-                    {key} : {_this.state.queue.stats[key]}
+                    {key[0].toUpperCase() + key.slice(1)} : {_this.state.queue.stats[key]}
                   </a>
                 </div>
               );
