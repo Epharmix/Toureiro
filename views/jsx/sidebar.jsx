@@ -39,8 +39,12 @@ ToureiroSidebar = React.createClass({
         var state = {
           queue: response.queue, 
         };
-        if (!_this.state.category) {
+        if (!_this.state.queue) {
           state.category = 'active';
+          if (_this.props.onQueueChange) {
+            _this.props.onQueueChange(queue);
+            _this.props.onCategoryChange('active');
+          }
         }
         _this.setState(state);
       } else {
