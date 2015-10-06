@@ -2,7 +2,8 @@ var React = require('react');
 var $ = require('jquery');
 
 var Sidebar = require('./sidebar.jsx');
-var Jobs = require('./jobs.jsx');
+var Jobs = require('./jobs.jsx').Jobs;
+var JobDetails = require('./jobs.jsx').JobDetails;
 
 var Toureiro = React.createClass({
 
@@ -25,11 +26,13 @@ var Toureiro = React.createClass({
     this.setState({
       category: category
     }, function() {
-      _this.refs.jobs.setState({
-        page: 0
-      }, function() {
-        _this.refs.jobs.fetchJobs();
-      });
+      if (_this.refs.jobs) {
+        _this.refs.jobs.setState({
+          page: 0
+        }, function() {
+          _this.refs.jobs.fetchJobs();
+        });
+      }
     });
   },
 
@@ -41,7 +44,11 @@ var Toureiro = React.createClass({
         <div id="toureiro-canvas">
         {
           (_this.state.queue && _this.state.category) ? (
-            <Jobs ref="jobs" queue={_this.state.queue} category={this.state.category} />
+            (_this.state.category === 'job') ? (
+              <JobDetails queue={_this.state.queue} />
+            ) : (
+              <Jobs ref="jobs" queue={_this.state.queue} category={this.state.category} />
+            )
           ) : ''
         }
         </div>

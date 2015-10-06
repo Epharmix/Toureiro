@@ -27,7 +27,7 @@ ToureiroSidebar = React.createClass({
 
   listQueues: function() {
     var _this = this;
-    $.get('/queue/list/', function(response) {
+    $.get('queue/list/', function(response) {
       if (response.status === 'OK') {
         _this.setState({
           queues: response.queues
@@ -43,10 +43,10 @@ ToureiroSidebar = React.createClass({
 
   getQueue: function(queue) {
     var _this = this;
-    $.get('/queue/?name=' + encodeURIComponent(queue), function(response) {
+    $.get('queue/?name=' + encodeURIComponent(queue), function(response) {
       if (response.status === 'OK') {
         var state = {
-          queue: response.queue, 
+          queue: response.queue,
         };
         if (!_this.state.queue) {
           stats = response.queue.stats;
@@ -94,7 +94,7 @@ ToureiroSidebar = React.createClass({
       }
     });
   },
- 
+
   render: function() {
     var _this = this;
     return (
@@ -113,20 +113,23 @@ ToureiroSidebar = React.createClass({
           </select>
         </div>
         <div id="sidebar-stats">
-        <h5>Job Status</h5>
-        {(() => {
-          if (_this.state.queue) {
-            return ['active', 'wait', 'delayed', 'completed', 'failed'].map(function(key) {
-              return (
-                <div key={key} className="sidebar-stat">
-                  <a href="javascript:;" onClick={_this.changeCategory.bind(_this, key)}>
-                    {key[0].toUpperCase() + key.slice(1)} : <span className="badge">{_this.state.queue.stats[key]}</span>
-                  </a>
-                </div>
-              );
-            });
-          }
-        })()}
+          <h5>Job Status</h5>
+          {(() => {
+            if (_this.state.queue) {
+              return ['active', 'wait', 'delayed', 'completed', 'failed'].map(function(key) {
+                return (
+                  <div key={key} className="sidebar-stat">
+                    <a href="javascript:;" onClick={_this.changeCategory.bind(_this, key)}>
+                      {key[0].toUpperCase() + key.slice(1)} : <span className="badge">{_this.state.queue.stats[key]}</span>
+                    </a>
+                  </div>
+                );
+              });
+            }
+          })()}
+          <div className="sidebar-stat">
+            <a href="javascript:;" onClick={_this.changeCategory.bind(_this, 'job')}>Job Details</a>
+          </div>
         </div>
       </div>
     );
