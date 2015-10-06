@@ -33,21 +33,25 @@ var ToureiroJobs = React.createClass({
 
   fetchJobs: function() {
     var _this = this;
-    $.get('/job/fetch/' + this.props.category, {
-      queue: this.props.queue,
-      page: this.state.page,
-      limit: this.state.limit
-    }, function(response) {
-      if (response.status === 'OK') {
-        _this.setState({
-          jobs: response.jobs,
-          total: response.total
-        }, function() {
-          _this.highlightCodeBlock();
-        }); 
-      } else {
-        console.log(response);
-      }
+    this.setState({
+      jobs: []
+    }, function() {
+      $.get('/job/fetch/' + _this.props.category, {
+        queue: _this.props.queue,
+        page: _this.state.page,
+        limit: _this.state.limit
+      }, function(response) {
+        if (response.status === 'OK') {
+          _this.setState({
+            jobs: response.jobs,
+            total: response.total
+          }, function() {
+            _this.highlightCodeBlock();
+          }); 
+        } else {
+          console.log(response);
+        }
+      });
     });
   },
 
@@ -60,27 +64,70 @@ var ToureiroJobs = React.createClass({
     });
   },
 
+  promoteJob: function(id, event) {
+    var _this = this;
+    if (confirm('Are you sure you want to promote this job?')) {
+      $.post('/job/promote/', {
+        queue: this.props.queue,
+        id: id
+      }, function(response) {
+        if (response.status === 'OK') {
+          _this.fetchJobs();
+        } else {
+          console.log(response);
+          alert(response.message);
+        }
+      });
+    }
+  },
+
+  removeJob: function(id, event) {
+
+  },
+
   render: function() {
+    var _this = this;
     return (
       <div className="toureiro-jobs">
         <h4 className="header">{this.props.category[0].toUpperCase() + this.props.category.slice(1)} Jobs</h4>
         <div ref="jobs">
           {
             this.state.jobs.map(function(job) {
+              try {
+                if (typeof job.data === 'string') {
+                  job.data = JSON.parse(job.data);
+                }
+                if (typeof job.opts === 'string') {
+                  job.opts = JSON.parse(job.opts);
+                }
+              } catch (err) {
+                console.log(err);
+              }
               return (
+<<<<<<< HEAD
                 <div className="job clearfix" key={job.id}>
                   <div className="job-details">
                     <h4 className="job-id">Job ID: {job.id}</h4>
+                    {
+                      (job.data && job.data.type && job.data._category) ? (
+                        <div>
+                          {job.data._category} : {job.data.type}
+                        </div>
+                      ) : ''
+                    }
                     <p className="job-creation">Created At:
                       <br/>
                       {moment(job.timestamp).format('MM/DD/YYYY hh:mm:ssA')}
                     </p>
                     {
                       job.delay ? (
-                        <p className="job-delay">Delayed Until:
-                          <br/>
-                          {moment(job.timestamp + job.delay).format('MM/DD/YYYY hh:mm:ssA')}
-                        </p>
+                        <div>
+                          <p className="job-delay">Delayed Until:
+                            <br/>
+                            {moment(job.timestamp + job.delay).format('MM/DD/YYYY hh:mm:ssA')}
+                          </p>
+                          <button className="btn btn-embossed btn-warning" onClick={_this.promoteJob.bind(_this, job.id)}>Promote</button>
+                        </div>
                       ) : ''
                     }
                   </div>

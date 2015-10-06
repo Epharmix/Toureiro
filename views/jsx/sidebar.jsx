@@ -49,10 +49,23 @@ ToureiroSidebar = React.createClass({
           queue: response.queue, 
         };
         if (!_this.state.queue) {
-          state.category = 'active';
+          stats = response.queue.stats;
+          category = 'active';
+          if (stats['active'] > 0) {
+            category = 'active';
+          } else if (stats['wait'] > 0) {
+            category = 'wait';
+          } else if (stats['delayed'] > 0) {
+            category = 'delayed';
+          } else if (stats['completed'] > 0) {
+            category = 'completed';
+          } else if (stats['failed'] > 0) {
+            category = 'failed';
+          }
+          state.category = category;
           if (_this.props.onQueueChange) {
             _this.props.onQueueChange(queue);
-            _this.props.onCategoryChange('active');
+            _this.props.onCategoryChange(category);
           }
         }
         _this.setState(state);
