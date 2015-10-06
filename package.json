@@ -27,7 +27,7 @@
     "bluebird": "2.10.x",
     "body-parser": "1.14.x",
     "bootstrap": "3.3.x",
-    "bull": "0.6.x",
+    "bull": "git+https://github.com/evanhuang8/bull.git#master",
     "classnames": "2.1.x",
     "express": "4.13.x",
     "flat-ui": "git+https://github.com/designmodo/Flat-UI.git#master",
