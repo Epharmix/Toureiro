@@ -101,7 +101,7 @@ ToureiroSidebar = React.createClass({
       <div id="toureiro-sidebar">
         <h4 className="header">Toureiro</h4>
         <div id="sidebar-queues">
-          <label>Select Queue:</label>
+          <h5>Select Queue:</h5>
           <select name="queue" onChange={this.changeQueue} className="form-control">
           {
             this.state.queues.map(function(queue) {
@@ -113,7 +113,7 @@ ToureiroSidebar = React.createClass({
           </select>
         </div>
         <div id="sidebar-stats">
-        <h4>Job Status</h4>
+        <h5>Job Status</h5>
         {(() => {
           if (_this.state.queue) {
             return ['active', 'wait', 'delayed', 'completed', 'failed'].map(function(key) {

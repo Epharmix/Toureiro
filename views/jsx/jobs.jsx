@@ -104,14 +104,15 @@ var ToureiroJobs = React.createClass({
                 console.log(err);
               }
               return (
-<<<<<<< HEAD
                 <div className="job clearfix" key={job.id}>
                   <div className="job-details">
                     <h4 className="job-id">Job ID: {job.id}</h4>
                     {
                       (job.data && job.data.type && job.data._category) ? (
                         <div>
-                          {job.data._category} : {job.data.type}
+                          <p className="job-category">
+                            {job.data._category} : {job.data.type}
+                          </p>
                         </div>
                       ) : ''
                     }

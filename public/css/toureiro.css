@@ -6930,12 +6930,12 @@ XCode style (c) Angel Garcia <angelgarcia.mail@gmail.com>
  * GLOBAL
  */
 *::selection {
-  background: orangered;
-  color: white;
+  background: gold;
+  color: darkblue;
 }
 *::-moz-selection {
-  background: orangered;
-  color: white;
+  background: gold;
+  color: darkblue;
 }
 html,
 body {
@@ -6969,8 +6969,6 @@ a:hover {
 }
 .header {
   padding: 1rem;
-  border-bottom: 3px double;
-  background-color: orangered;
 }
 .badge {
   background-color: orangered;
@@ -7029,6 +7027,10 @@ a:hover {
   background-color: darkblue;
   color: ghostwhite;
 }
+#toureiro-sidebar .header {
+  padding-left: 0;
+  border-bottom: 3px double;
+}
 #sidebar-queues {
   margin: 1.5rem 0;
   border-bottom: 1px solid white;
@@ -7057,8 +7059,8 @@ a:hover {
   overflow-y: auto;
 }
 #toureiro-canvas .header {
-  background-color: gold;
-  color: darkblue;
+  background-color: orangered;
+  color: white;
   display: inline-block;
   margin-bottom: 2rem;
   margin-top: 0.25rem;
@@ -7079,11 +7081,15 @@ a:hover {
 .job-details p {
   padding-left: 1rem;
 }
-.job-id {
-  background-color: orangered;
-  color: white;
+.job-id,
+.job-category {
+  background-color: gold;
+  color: darkblue;
   display: inline-block;
   padding: 0.5rem 1rem;
+}
+.job-category {
+  margin-top: 0px;
 }
 .job-code {
   width: 80%;

@@ -17,13 +17,13 @@
  * GLOBAL
  */
 *::selection {
-  background: @red;
-  color: white;
+  background: @yellow;
+  color: @blue;
 }
 
 *::-moz-selection {
-  background: @red;
-  color: white;
+  background: @yellow;
+  color: @blue;
 }
 
 html, body {
@@ -69,8 +69,6 @@ a:hover
 .header
 {
   padding: 1rem;
-  border-bottom: 3px double;
-  background-color: @red;
 }
 
 .badge
@@ -149,6 +147,8 @@ a:hover
 
 #toureiro-sidebar .header
 {
+  padding-left: 0;
+  border-bottom: 3px double;
 }
 
 #sidebar-queues
@@ -194,8 +194,8 @@ a:hover
 
 #toureiro-canvas .header
 {
-  background-color: @yellow;
-  color: @blue;
+  background-color: @red;
+  color: white;
   display: inline-block;
   margin-bottom: 2rem;
   margin-top: 0.25rem;
@@ -224,12 +224,18 @@ a:hover
   padding-left: 1rem;
 }
 
-.job-id
+.job-id,
+.job-category
 {
-  background-color: @red;
-  color: white;
+  background-color: @yellow;
+  color: @blue;
   display: inline-block;
   padding: 0.5rem 1rem;
+}
+
+.job-category
+{
+  margin-top: 0px;
 }
 
 .job-create
