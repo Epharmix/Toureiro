@@ -63,20 +63,28 @@ var ToureiroJobs = React.createClass({
   render: function() {
     return (
       <div className="toureiro-jobs">
-        <h4>{this.props.category[0].toUpperCase() + this.props.category.slice(1)}</h4>
+        <h4 className="header">{this.props.category[0].toUpperCase() + this.props.category.slice(1)} Jobs</h4>
         <div ref="jobs">
           {
             this.state.jobs.map(function(job) {
               return (
-                <div className="job" key={job.id}>
-                  <h4>Job ID: {job.id}</h4>
-                  <p>Created At: {moment(job.timestamp).format('MM/DD/YYYY hh:mm:ssA')}</p>
-                  {
-                    job.delay ? (
-                      <p>Delayed Till: {moment(job.timestamp + job.delay).format('MM/DD/YYYY hh:mm:ssA')}</p>
-                    ) : ''
-                  }
-                  <pre>
+                <div className="job clearfix" key={job.id}>
+                  <div className="job-details">
+                    <h4 className="job-id">Job ID: {job.id}</h4>
+                    <p className="job-creation">Created At:
+                      <br/>
+                      {moment(job.timestamp).format('MM/DD/YYYY hh:mm:ssA')}
+                    </p>
+                    {
+                      job.delay ? (
+                        <p className="job-delay">Delayed Until:
+                          <br/>
+                          {moment(job.timestamp + job.delay).format('MM/DD/YYYY hh:mm:ssA')}
+                        </p>
+                      ) : ''
+                    }
+                  </div>
+                  <pre className="job-code">
                     <code dangerouslySetInnerHTML={{__html: JSON.stringify(job, null, 2)}} />
                   </pre>
                 </div>

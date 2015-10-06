@@ -1,24 +1,169 @@
+/**
+ * Color palette loosely based on this champ
+ * http://n.i.uol.com.br/ultnot/album/111128_f_005.jpg
+ */
+
+/**
+ * VARIABLES
+ */
+@serif-font-family: "";
+
+@light: aliceblue;
+@medium: lightblue;
+@dark: midnightblue;
+
+@complement: tomato;
+
+/**
+ * GLOBAL
+ */
+*::selection {
+  background: @complement;
+  color: white;
+}
+
+*::-moz-selection {
+  background: @complement;
+  color: white;
+}
+
 html, body {
   width: 100%;
   height: 100%;
 }
 
+html
+{
+  padding: 0.5rem;
+  margin: 0;
+  background-color: @dark;
+}
+
+body
+{
+  margin: 0;
+  padding: 0;
+  color: @dark;
+  font-family: "Courier New", sans-serif;
+}
+
+a
+{
+  color: @complement;
+}
+
+a:focus,
+a:active,
+a:hover
+{
+  color: white;
+  text-decoration: none;
+}
+
+.badge
+{
+  background-color: @complement;
+}
+
+/**
+ * WRAPPER
+ */
 #toureiro {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-#toureiro-sidebar {
-  position: fixed;
-  width: 200px;
+#toureiro-wrapper
+{
   height: 100%;
-  top: 0;
-  left: 0;
 }
 
+/**
+ * SIDEBAR
+ */
+#toureiro-sidebar {
+  position: fixed;
+  padding: 1rem;
+  width: 200px;
+  top: 0;
+  left: auto;
+  bottom: 0;
+  background-color: @dark;
+  color: @light;
+}
+
+.header
+{
+  padding: 1rem 0;
+  border-bottom: 3px double;
+}
+
+#sidebar-queues
+{
+  margin: 1.5rem 0;
+  border-bottom: 1px solid white;
+  padding-bottom: 2rem;
+}
+
+#sidebar-stats
+{
+
+}
+
+.sidebar-stat
+{
+  margin: 2rem 0;
+}
+
+
+/**
+ * CANVAS
+ */
 #toureiro-canvas {
   width: 100%;
   height: 100%;
   padding-left: 200px;
+  background-color: @light;
+  overflow-y: auto;
+}
+
+.toureiro-jobs {
+  padding: 1rem;
+}
+
+.job
+{
+  border-bottom: 1px solid @medium;
+  margin-bottom: 1rem;
+}
+
+.job-details
+{
+  width: 25%;
+  float: left;
+}
+
+.job-id
+{
+  background-color: @complement;
+  color: white;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+}
+
+.job-create
+{
+}
+
+.job-delay
+{
+}
+
+.job-code
+{
+  width: 75%;
+  float: left;
+  border-color: @medium;
+  background-color: @light;
 }

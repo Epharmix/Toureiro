@@ -86,10 +86,10 @@ ToureiroSidebar = React.createClass({
     var _this = this;
     return (
       <div id="toureiro-sidebar">
-        <h4>Toureiro</h4>
+        <h4 className="header">Toureiro</h4>
         <div id="sidebar-queues">
-          <label>Queues</label>
-          <select name="queue" onChange={this.changeQueue}>
+          <label>Select Queue:</label>
+          <select name="queue" onChange={this.changeQueue} className="form-control">
           {
             this.state.queues.map(function(queue) {
               return (
@@ -100,13 +100,14 @@ ToureiroSidebar = React.createClass({
           </select>
         </div>
         <div id="sidebar-stats">
+        <h4>Job Status</h4>
         {(() => {
           if (_this.state.queue) {
             return ['active', 'wait', 'delayed', 'completed', 'failed'].map(function(key) {
               return (
-                <div key={key}>
+                <div key={key} className="sidebar-stat">
                   <a href="javascript:;" onClick={_this.changeCategory.bind(_this, key)}>
-                    {key[0].toUpperCase() + key.slice(1)} : {_this.state.queue.stats[key]}
+                    {key[0].toUpperCase() + key.slice(1)} : <span className="badge">{_this.state.queue.stats[key]}</span>
                   </a>
                 </div>
               );
