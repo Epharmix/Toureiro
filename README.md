@@ -1,5 +1,7 @@
 # Toureiro
 
+[![npm version](https://badge.fury.io/js/toureiro.svg)](https://badge.fury.io/js/toureiro)
+
 A graphical monitoring interface for the distributed job queue [bull](https://github.com/OptimalBits/bull) built using `express` and `react`. Toureiro provides simple monitoring features as well as the ability to promote delayed jobs directly.
 
 ## Screenshots
@@ -77,6 +79,14 @@ Options:
 --rdb          Redis database number, default to 0
 --pass         Redis password, default to null
 ```
+
+## Development
+
+`gulp dev`: Starts a test server for port 3000 and redis db #1
+
+`npm test`: Runs the mocha tests
+
+Any issues reporting or pull requests are welcomed!
 
 ## Why Bull?
 
