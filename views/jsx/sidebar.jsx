@@ -46,7 +46,7 @@ ToureiroSidebar = React.createClass({
     $.get('/queue/?name=' + encodeURIComponent(queue), function(response) {
       if (response.status === 'OK') {
         var state = {
-          queue: response.queue, 
+          queue: response.queue,
         };
         if (!_this.state.queue) {
           stats = response.queue.stats;
@@ -94,7 +94,7 @@ ToureiroSidebar = React.createClass({
       }
     });
   },
- 
+
   render: function() {
     var _this = this;
     return (
@@ -113,19 +113,22 @@ ToureiroSidebar = React.createClass({
           </select>
         </div>
         <div id="sidebar-stats">
-        {(() => {
-          if (_this.state.queue) {
-            return ['active', 'wait', 'delayed', 'completed', 'failed'].map(function(key) {
-              return (
-                <div key={key}>
-                  <a href="javascript:;" onClick={_this.changeCategory.bind(_this, key)}>
-                    {key[0].toUpperCase() + key.slice(1)} : {_this.state.queue.stats[key]}
-                  </a>
-                </div>
-              );
-            });
-          }
-        })()}
+          {(() => {
+            if (_this.state.queue) {
+              return ['active', 'wait', 'delayed', 'completed', 'failed'].map(function(key) {
+                return (
+                  <div key={key}>
+                    <a href="javascript:;" onClick={_this.changeCategory.bind(_this, key)}>
+                      {key[0].toUpperCase() + key.slice(1)} : {_this.state.queue.stats[key]}
+                    </a>
+                  </div>
+                );
+              });
+            }
+          })()}
+          <div>
+            <a href="javascript:;" onClick={_this.changeCategory.bind(_this, 'job')}>Job Details</a>
+          </div>
         </div>
       </div>
     );
