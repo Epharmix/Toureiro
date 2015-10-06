@@ -8,22 +8,21 @@
  */
 @serif-font-family: "";
 
-@light: aliceblue;
-@medium: lightblue;
-@dark: midnightblue;
-
-@complement: tomato;
+@lightblue: ghostwhite;
+@blue: darkblue;
+@red: orangered;
+@yellow: gold;
 
 /**
  * GLOBAL
  */
 *::selection {
-  background: @complement;
+  background: @red;
   color: white;
 }
 
 *::-moz-selection {
-  background: @complement;
+  background: @red;
   color: white;
 }
 
@@ -36,20 +35,21 @@ html
 {
   padding: 0.5rem;
   margin: 0;
-  background-color: @dark;
+  background-color: @blue;
 }
 
 body
 {
   margin: 0;
   padding: 0;
-  color: @dark;
+  color: @blue;
   font-family: "Courier New", sans-serif;
+  min-width: 800px;
 }
 
 a
 {
-  color: @complement;
+  color: white;
 }
 
 a:focus,
@@ -60,9 +60,63 @@ a:hover
   text-decoration: none;
 }
 
+a:hover
+{
+  background-color: @yellow;
+  color: @blue;
+}
+
+.header
+{
+  padding: 1rem;
+  border-bottom: 3px double;
+  background-color: @red;
+}
+
 .badge
 {
-  background-color: @complement;
+  background-color: @red;
+}
+
+.pagination
+{
+  border-top: 1px solid @yellow;
+  padding-top: 1rem;
+  display: block;
+}
+
+.pagination ul
+{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.pagination li
+{
+  display: inline-block;
+  // border: 1px solid @yellow;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0 1px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.pagination li.active a
+{
+  margin: 0;
+  padding: 0;
+  color: white;
+  background-color: @red;
+}
+
+.pagination li a
+{
+  display: block;
+  color: @red;
 }
 
 /**
@@ -89,14 +143,12 @@ a:hover
   top: 0;
   left: auto;
   bottom: 0;
-  background-color: @dark;
-  color: @light;
+  background-color: @blue;
+  color: @lightblue;
 }
 
-.header
+#toureiro-sidebar .header
 {
-  padding: 1rem 0;
-  border-bottom: 3px double;
 }
 
 #sidebar-queues
@@ -114,8 +166,20 @@ a:hover
 .sidebar-stat
 {
   margin: 2rem 0;
+  padding: 1rem;
 }
 
+.sidebar-stat:hover,
+.sidebar-stat.active
+{
+  background-color: @yellow;
+}
+
+.sidebar-stat:hover a,
+.sidebar-stat.active a
+{
+  color: @blue;
+}
 
 /**
  * CANVAS
@@ -124,8 +188,18 @@ a:hover
   width: 100%;
   height: 100%;
   padding-left: 200px;
-  background-color: @light;
+  background-color: @lightblue;
   overflow-y: auto;
+}
+
+#toureiro-canvas .header
+{
+  background-color: @yellow;
+  color: @blue;
+  display: inline-block;
+  margin-bottom: 2rem;
+  margin-top: 0.25rem;
+  border: none;
 }
 
 .toureiro-jobs {
@@ -134,19 +208,25 @@ a:hover
 
 .job
 {
-  border-bottom: 1px solid @medium;
-  margin-bottom: 1rem;
+  border-top: 1px solid @yellow;
+  padding-top: 1rem;
 }
 
 .job-details
 {
-  width: 25%;
+  width: 20%;
+  min-width: 225px;
   float: left;
+}
+
+.job-details p
+{
+  padding-left: 1rem;
 }
 
 .job-id
 {
-  background-color: @complement;
+  background-color: @red;
   color: white;
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -162,8 +242,8 @@ a:hover
 
 .job-code
 {
-  width: 75%;
+  width: 80%;
+  min-width: 375px;
   float: left;
-  border-color: @medium;
-  background-color: @light;
+  background-color: @lightblue;
 }

@@ -54,7 +54,7 @@ var Pagination = React.createClass({
       <div className="pagination">
         <ul>
           <li className="previous">
-            <a href="javascript:;" className="fui-arrow-left" onClick={_this.stepPage.bind(_this, -1)}></a>
+            <a href="javascript:;" className="fui-arrow-left" onClick={_this.stepPage.bind(_this, -1)}>«</a>
           </li>
           {
             pages.map(function(page) {
@@ -69,7 +69,7 @@ var Pagination = React.createClass({
             })
           }
           <li className="next">
-            <a href="javascript:;" className="fui-arrow-right" onClick={_this.stepPage.bind(_this, 1)}></a>
+            <a href="javascript:;" className="fui-arrow-right" onClick={_this.stepPage.bind(_this, 1)}>»</a>
           </li>
         </ul>
       </div>
