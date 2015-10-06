@@ -66,8 +66,16 @@ var app = toureiro({
 
 ## Usage
 
-```
+You can invoke `toureiro --help` to see usage instructions:
 
+```
+Usage: toureiro [port]
+[port]         Port for toureiro to listen to
+Options:
+--rh           Redis host, default to 127.0.0.1
+--rp           Redis port, default to 6379
+--rdb          Redis database number, default to 0
+--pass         Redis password, default to null
 ```
 
 ## Why Bull?
