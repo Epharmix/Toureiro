@@ -43,6 +43,8 @@
     "browserify": "11.2.x",
     "chai": "3.3.x",
     "gulp": "3.9.x",
+    "gulp-cssmin": "0.1.x",
+    "gulp-ignore": "2.0.x",
     "gulp-less": "3.0.x",
     "gulp-livereload": "3.8.x",
     "gulp-notify": "2.2.x",

@@ -1,4 +1,5 @@
 var app = require('./lib/toureiro')({
+  development: true,
   redis: {
     db: 1
   }

@@ -2,6 +2,8 @@ var browserify = require('browserify');
 var gulp = require('gulp');
 var reactify = require('reactify');
 var buffer = require('vinyl-buffer');
+var cssmin = require('gulp-cssmin');
+var ignore =require('gulp-ignore');
 var less = require('gulp-less');
 var livereload = require('gulp-livereload');
 var notify = require('gulp-notify');
@@ -16,13 +18,21 @@ var runLess = function() {
   return gulp
     .src('./views/css/toureiro.less')
     .pipe(less())
-    .pipe(gulp.dest('./public/css/'))
+    .pipe(gulp.dest('./public/dev/css'))
     .pipe(livereload());
 };
 
-gulp.task('less', runLess);
+var runLessMin = function() {
+  return gulp
+    .src('./views/css/toureiro.less')
+    .pipe(less())
+    .pipe(cssmin())
+    .pipe(gulp.dest('./public/css'));
+}
 
-gulp.task('build', function() {
+gulp.task('less', runLessMin);
+
+gulp.task('buildBundle', function() {
   var bundler = browserify({
     entries: './views/jsx/index.jsx',
     debug: true,
@@ -31,11 +41,9 @@ gulp.task('build', function() {
   return bundler.bundle()
     .pipe(source('app.js'))
     .pipe(buffer())
-    .pipe(sourcemaps.init({
-      loadMaps: true
-    }))
-    .pipe(uglify())
-    .pipe(sourcemaps.write('./'))
+    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(uglify().on('error', gutil.log))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('./public/js/'));
 });
 
@@ -63,7 +71,7 @@ function bundle(bundler) {
     .on('error', gutil.log)
     .pipe(source('app.js'))
     .pipe(buffer())
-    .pipe(gulp.dest('./public/js/'))
+    .pipe(gulp.dest('./public/dev/js/'))
     .pipe(livereload())
     .pipe(notify(function() {
       console.log('Bundled! Process took', (Date.now() - start) + 'ms');
@@ -88,6 +96,8 @@ gulp.task('server', shell.task([
 
 gulp.task('dev', [
   'livereload',
-  'watch', 
+  'watch',
   'server'
 ]);
+
+gulp.task('build', ['buildBundle', 'less']);

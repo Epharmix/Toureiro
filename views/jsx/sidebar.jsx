@@ -114,9 +114,9 @@ ToureiroSidebar = React.createClass({
         </div>
         <div id="sidebar-stats">
           <h5>Job Status</h5>
-          {(() => {
-            if (_this.state.queue) {
-              return ['active', 'wait', 'delayed', 'completed', 'failed'].map(function(key) {
+          {
+            (_this.state.queue) ? (
+              ['active', 'wait', 'delayed', 'completed', 'failed'].map(function(key) {
                 return (
                   <div key={key} className="sidebar-stat">
                     <a href="javascript:;" onClick={_this.changeCategory.bind(_this, key)}>
@@ -124,9 +124,9 @@ ToureiroSidebar = React.createClass({
                     </a>
                   </div>
                 );
-              });
-            }
-          })()}
+              })
+            ) : ''
+          }
           <div className="sidebar-stat">
             <a href="javascript:;" onClick={_this.changeCategory.bind(_this, 'job')}>Job Details</a>
           </div>
