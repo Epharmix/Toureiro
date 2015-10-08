@@ -72,6 +72,8 @@ var Job = React.createClass({
                     <button className="btn btn-embossed btn-warning" onClick={_this.promoteJob}>Promote</button>
                   ) : ''
                 }
+                <br />
+                <br />
               </div>
             ) : ''
           }

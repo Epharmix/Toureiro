@@ -61,11 +61,20 @@ var Pagination = React.createClass({
               var pageClasses = classnames({
                 active: _this.state.page === page
               });
-              return (
-                <li className={pageClasses} key={page}>
-                  <a href="javascript:;" onClick={_this.changePage.bind(_this, page)}>{page + 1}</a>
-                </li>
-              );
+              if ([0, _this.props.total - 1, _this.state.page, _this.state.page - 1, _this.state.page + 1].indexOf(page) !== -1) {
+                return (
+                  <li className={pageClasses} key={page}>
+                    <a href="javascript:;" onClick={_this.changePage.bind(_this, page)}>{page + 1}</a>
+                  </li>
+                );
+              } else if ((page === _this.state.page - 2 && page !== 0) || (page === _this.state.page + 2 && page !== _this.props.total - 1)) {
+                return (
+                  <li className="disabled" key={page}>
+                    <a href="javascript:;">..</a>
+                  </li>
+                );
+              }
+              return;
             })
           }
           <li className="next">
