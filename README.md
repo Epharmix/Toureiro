@@ -8,7 +8,7 @@ A graphical monitoring interface for the distributed job queue [bull](https://gi
 
 ![Job List](https://raw.githubusercontent.com/Epharmix/Toureiro/screenshots/public/screenshots/Job%20List.png "Job List")
 
-![Job List](https://raw.githubusercontent.com/Epharmix/Toureiro/screenshots/public/screenshots/Search%20Job.png "Job List")
+![Search Job](https://raw.githubusercontent.com/Epharmix/Toureiro/screenshots/public/screenshots/Search%20Job.png "Search Job")
 
 ## Get Started
 
