@@ -11,7 +11,7 @@ var Job = React.createClass({
     hljs.highlightBlock(this.refs.code.getDOMNode());
   },
 
-  promoteJob: function(id, event) {
+  promoteJob: function() {
     var _this = this;
     if (confirm('Are you sure you want to promote this job?')) {
       $.post('job/promote/', {
@@ -19,8 +19,27 @@ var Job = React.createClass({
         id: this.props.job.id
       }, function(response) {
         if (response.status === 'OK') {
-          if (_this.props.onJobPromote) {
-            _this.props.onJobPromote();
+          if (_this.props.onJobUpdate) {
+            _this.props.onJobUpdate();
+          }
+        } else {
+          console.log(response);
+          alert(response.message);
+        }
+      });
+    }
+  },
+
+  removeJob: function() {
+    var _this = this;
+    if (confirm('Are you sure you want to remove job ' + this.props.job.id + '? This action is not reversible.')) {
+      $.post('job/remove/', {
+        queue: this.props.queue,
+        id: this.props.job.id
+      }, function(response) {
+        if (response.status === 'OK') {
+          if (_this.props.onJobUpdate) {
+            _this.props.onJobUpdate();
           }
         } else {
           console.log(response);
@@ -47,6 +66,12 @@ var Job = React.createClass({
       <div className="job clearfix" key={job.id}>
         <div className="job-details">
           <h4 className="job-id">Job ID: {job.id}</h4>
+          <br />
+          {
+            this.props.showState ? (
+              <h5 className={"job-state " + job.state}>{job.state[0].toUpperCase() + job.state.substring(1)}</h5>
+            ) : ''
+          }
           {
             (job.data && job.data.type && job.data._category) ? (
               <div>
@@ -61,15 +86,15 @@ var Job = React.createClass({
             {moment(job.timestamp).format('MM/DD/YYYY hh:mm:ssA')}
           </p>
           {
-            job.delay ? (
+            job.state === 'delayed' ? (
               <div>
                 <p className="job-delay">Delayed Until:
                   <br/>
                   {moment(job.timestamp + job.delay).format('MM/DD/YYYY hh:mm:ssA')}
                 </p>
                 {
-                  _this.props.enablePromote ? (
-                    <button className="btn btn-embossed btn-warning" onClick={_this.promoteJob}>Promote</button>
+                  _this.props.enablePromote && !_this.props.readonly ? (
+                    <button className="job-promote btn btn-embossed btn-warning" onClick={_this.promoteJob}>Promote</button>
                   ) : ''
                 }
                 <br />
@@ -77,6 +102,15 @@ var Job = React.createClass({
               </div>
             ) : ''
           }
+          {
+            this.props.readonly ? '' : (
+              <div>
+                <a className="job-remove" href="javascript:;" onClick={this.removeJob}>Remove Job</a>
+              </div>
+            )
+          }
+          <br />
+          <br />
         </div>
         <pre className="job-code">
           <code ref="code" dangerouslySetInnerHTML={{__html: JSON.stringify(job, null, 2)}} />
@@ -148,7 +182,7 @@ var JobDetails = React.createClass({
         <br />
         {
           (this.state.job) ? (
-            <Job job={this.state.job} queue={this.props.queue} enablePromote={true} />
+            <Job job={this.state.job} queue={this.props.queue} enablePromote={true} showState={true} readonly={this.props.readonly} />
           ) : (
             (this.state.id) ? (
               <span>Job is not found.</span>
@@ -220,7 +254,7 @@ var ToureiroJobs = React.createClass({
     });
   },
 
-  handleJobPromote: function() {
+  handleJobUpdate: function() {
     this.fetchJobs();
   },
 
@@ -233,7 +267,7 @@ var ToureiroJobs = React.createClass({
           {
             this.state.jobs.map(function(job) {
               return (
-                <Job key={job.id} job={job} queue={_this.props.queue} onJobPromote={_this.handleJobPromote} enablePromote={_this.props.category === 'delayed'} />
+                <Job key={job.id} job={job} queue={_this.props.queue} onJobUpdate={_this.handleJobUpdate} enablePromote={_this.props.category === 'delayed'} readonly={_this.props.readonly} />
               );
             })
           }

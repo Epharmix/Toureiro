@@ -131,6 +131,11 @@ ToureiroSidebar = React.createClass({
             <a href="javascript:;" onClick={_this.changeCategory.bind(_this, 'job')}>Job Details</a>
           </div>
         </div>
+        <div className="sidebar-controls">
+          <div>
+            <input id="readonly" type="checkbox" name="readonly" checkedLink={this.props.readonlyLink} />  <label htmlFor="readonly">ReadOnly</label>
+          </div>
+        </div>
       </div>
     );
   }

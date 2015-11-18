@@ -8,10 +8,14 @@
  */
 @serif-font-family: "";
 
+@white: #FFFFFF;
 @lightblue: ghostwhite;
 @blue: darkblue;
 @red: orangered;
 @yellow: gold;
+@green: #4BC600;
+@purple: #B716FF;
+@black: #000000;
 
 /**
  * GLOBAL
@@ -233,6 +237,37 @@ a:hover
   padding: 0.5rem 1rem;
 }
 
+.job-state
+{
+  display: inline-block;
+  padding: 0.5rem 1rem;
+
+  &.completed {
+    color: @white;
+    background-color: @green;
+  }
+
+  &.delayed {
+    color: @white;
+    background-color: @purple;
+  }
+
+  &.failed {
+    color: @white;
+    background-color: @black;
+  }
+
+  &.active {
+    color: @white;
+    background-color: @red;
+  }
+
+  &.waiting {
+    color: @white;
+    background-color: @blue;
+  }
+}
+
 .job-category
 {
   margin-top: 0px;
@@ -244,6 +279,22 @@ a:hover
 
 .job-delay
 {
+}
+
+.job-promote
+{
+  margin-left: 10px;
+}
+
+.job-remove 
+{
+  color: @red !important;
+  font-size: 12px;
+  margin-left: 10px;
+
+  &:hover {
+    background-color: transparent;
+  }
 }
 
 .job-code

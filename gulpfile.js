@@ -30,7 +30,8 @@ var runLessMin = function() {
     .pipe(gulp.dest('./public/css'));
 }
 
-gulp.task('less', runLessMin);
+gulp.task('less', runLess);
+gulp.task('lessMin', runLessMin);
 
 gulp.task('buildBundle', function() {
   var bundler = browserify({
@@ -100,4 +101,4 @@ gulp.task('dev', [
   'server'
 ]);
 
-gulp.task('build', ['buildBundle', 'less']);
+gulp.task('build', ['buildBundle', 'lessMin']);
