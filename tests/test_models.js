@@ -100,6 +100,17 @@ describe('Models', function() {
       });
     });
 
+    it('#remove()', function(done) {
+      buildQueue('job').then(function() {
+        Job.remove('job', 1).then(function() {
+          Job.get('job', 1).then(function(job) {
+            expect(job).to.not.exist;
+            done();
+          });
+        });
+      });
+    });
+
     describe('`wait`', function() {
 
       beforeEach(function(done) {
