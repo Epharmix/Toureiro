@@ -49,6 +49,25 @@ var Job = React.createClass({
     }
   },
 
+  rerunJob: function() {
+    var _this = this;
+    if (confirm('Are you sure you want to rerun job ' + this.props.job.id + '? This will create another instance of the job with the same params and will be executed immediately.')) {
+      $.post('job/rerun/', {
+        queue: this.props.queue,
+        id: this.props.job.id
+      }, function(response) {
+        if (response.status === 'OK') {
+          if (_this.props.onJobUpdate) {
+            _this.props.onJobUpdate();
+          }
+        } else {
+          console.log(response);
+          alert(response.message);
+        }
+      });
+    }
+  },
+
   render: function() {
     var _this = this;
     var job = this.props.job;
@@ -101,6 +120,13 @@ var Job = React.createClass({
                 <br />
               </div>
             ) : ''
+          }
+          {
+            this.props.readonly || job.state !== 'completed' ? '' : (
+              <div>
+                <a className="job-rerun" href="javascript:;" onClick={this.rerunJob}>Rerun Job</a>
+              </div>
+            )
           }
           {
             this.props.readonly ? '' : (
