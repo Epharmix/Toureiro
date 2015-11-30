@@ -1,6 +1,6 @@
 {
   "name": "toureiro",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "A graphic interface for bull.",
   "main": "index.js",
   "scripts": {
