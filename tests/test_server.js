@@ -65,7 +65,7 @@ describe('Server', function() {
 
       beforeEach(function(done) {
         cleanSlate().then(function() {
-          buildQueue('completed').then(function(_q) {
+          buildQueue('rerun-completed').then(function(_q) {
             q = _q;
             q.process(function(job) {});
             setTimeout(function() {
@@ -76,7 +76,7 @@ describe('Server', function() {
       });
 
       it('should be able to rerun completed jobs', function(done) {
-        Job.fetch('completed', 'completed', 0, 1).then(function(jobs) {
+        Job.fetch('rerun-completed', 'completed', 0, 1).then(function(jobs) {
           expect(jobs).to.be.an('array');
           expect(jobs.length).to.equal(1);
           var job = jobs[0];
@@ -84,7 +84,7 @@ describe('Server', function() {
             .post('/job/rerun')
             .set('Accept', 'application/json')
             .send({
-              queue: 'completed',
+              queue: 'rerun-completed',
               id: job.jobId
             })
             .expect(200)
@@ -97,7 +97,7 @@ describe('Server', function() {
               expect(res.body.job).to.exist;
               expect(res.body.job.id).to.not.equal(job.jobId);
               setTimeout(function() {
-                Job.get('completed', res.body.job.id).then(function(job) {
+                Job.get('rerun-completed', res.body.job.id).then(function(job) {
                   expect(job).to.exist;
                   expect(job.state).to.equal('completed');
                   done();
@@ -115,10 +115,10 @@ describe('Server', function() {
 
       beforeEach(function(done) {
         cleanSlate().then(function() {
-          buildQueue('failed').then(function(_q) {
+          buildQueue('rerun-failed').then(function(_q) {
             q = _q;
             q.process(function(job) {
-              if (job.jobId == 1) {
+              if (job.jobId <= 20) {
                 throw new Error('doomed!');
               }
             });
@@ -130,7 +130,7 @@ describe('Server', function() {
       });
 
       it('should be able to rerun failed jobs', function(done) {
-        Job.fetch('failed', 'failed', 0, 1).then(function(jobs) {
+        Job.fetch('rerun-failed', 'failed', 0, 1).then(function(jobs) {
           expect(jobs).to.be.an('array');
           expect(jobs.length).to.equal(1);
           var job = jobs[0];
@@ -138,7 +138,7 @@ describe('Server', function() {
             .post('/job/rerun')
             .set('Accept', 'application/json')
             .send({
-              queue: 'failed',
+              queue: 'rerun-failed',
               id: job.jobId
             })
             .expect(200)
@@ -151,7 +151,7 @@ describe('Server', function() {
               expect(res.body.job).to.exist;
               expect(res.body.job.id).to.not.equal(job.jobId);
               setTimeout(function() {
-                Job.get('failed', res.body.job.id).then(function(job) {
+                Job.get('rerun-failed', res.body.job.id).then(function(job) {
                   expect(job).to.exist;
                   expect(job.state).to.equal('completed');
                   done();
