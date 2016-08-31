@@ -122,7 +122,7 @@ var Job = React.createClass({
             ) : ''
           }
           {
-            this.props.readonly || job.state !== 'completed' ? '' : (
+            this.props.readonly || (job.state !== 'completed' && job.state !== 'failed') ? '' : (
               <div>
                 <a className="job-rerun" href="javascript:;" onClick={this.rerunJob}>Rerun Job</a>
               </div>
