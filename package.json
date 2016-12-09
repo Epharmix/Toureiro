@@ -36,7 +36,7 @@
     "lodash": "3.10.x",
     "minimist": "1.2.x",
     "moment-timezone": "0.4.x",
-    "pug": "~2.0.0-beta6",
+    "pug": "2.0.0-beta6",
     "react": "0.13.x",
     "redis": "2.1.x"
   },
